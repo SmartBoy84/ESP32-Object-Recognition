@@ -6,7 +6,9 @@ My humble attempt at getting tensorflow and the ESP32-CAM to cooperate (among ot
   * Get [OpenCV](https://www.lfd.uci.edu/~gohlke/pythonlibs/) & [TensorFlow](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md)
   * My project uses TensorFlow 1.0 which only support Python <= 3.7
   * Get a TensorFlow model [COCO]
-<br>
+
+
+
 **Similarly, the ESP32 project isn't plug and play either:**
   * Open the arduino code in PlatformIO as that **should** automatically resolve any library dependencies.
   * Change it accordingly
@@ -14,9 +16,13 @@ My humble attempt at getting tensorflow and the ESP32-CAM to cooperate (among ot
     * Set the correct resistors used for the voltage divider
     * Set server port/local ip
   * Power is supplied through a 4.2 lithium ion battery powered through the appropriate regulator
-<br>
+
+
+
 **Web:**
   * Set ESP module's local IP
   * Try to make the webpage (index.html) look nice??
-<br>
+
+
+
 I probably missed stuff, idk
