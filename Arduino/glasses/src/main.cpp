@@ -130,7 +130,7 @@ void mailBoy(void *parameter)
 
     status[0] = ((analogRead(probePin) - voltMin) * 100) / voltRange; //set base on voltmax
 
-    if (status[0] <= /*settings[1] * 1000*/ -1)
+    if (status[0] <= settings[1] * 1000)
     {
       pinMode(LED_BUILTIN, OUTPUT);
       digitalWrite(LED_BUILTIN, LOW);
