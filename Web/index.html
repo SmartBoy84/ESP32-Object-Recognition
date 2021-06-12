@@ -1,0 +1,72 @@
+<html>
+<style>
+    #dabois {
+        display: block;
+    }
+</style>
+
+<body>
+    <span id="dabois">Status: <span id="status">Offline</span></span>
+    <br>
+    <span id="rest" style="display: none;">
+        <span id="dabois">Battery life: <span id="battery"></span></span>
+        <br>
+        <span id="dabois">Minimum voltage: <span id="mVol">0</span></span><input id="vCon" type="range" min="37"
+            max="41" value="0" class="slider">
+        <br><br>
+        <span id="dabois">LED brightness: <span id="brightness">0</span></span><input id="bCon" type="range" min="0"
+            max="255" value="0" class="slider">
+    </span>
+
+</body>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    var socket = io();
+
+    socket.on('states', (states) => reset(states))
+    socket.emit("states", "dummy")
+
+    var bCon = false
+    var vCon = false
+
+    document.getElementById("bCon").addEventListener(("mousedown"), () => bCon = true);
+    document.getElementById("vCon").addEventListener(("mousedown"), () => vCon = true);
+    document.getElementById("bCon").addEventListener(("mouseup"), () => bCon = false);
+    document.getElementById("vCon").addEventListener(("mouseup"), () => vCon = false);
+    document.getElementById("bCon").onchange = function () { socket.emit("command", [0, 0, this.value]) }
+    document.getElementById("vCon").onchange = function () { socket.emit("command", [0, 1, this.value]) }
+
+
+    function reset(states) {
+        let main = document.getElementById("rest")
+
+        if (states["active"] == 1) {
+            document.getElementById("status").innerHTML = "Online"
+            document.getElementById("status").style.color = "green"
+
+            document.getElementById("battery").innerHTML = states["status"]["current battery"]
+            document.getElementById("mVol").innerHTML = states["settings"]["minimum voltage"]
+            document.getElementById("brightness").innerHTML = states["settings"]["led brightness"]
+
+            if (!bCon) document.getElementById("bCon").value = states["settings"]["led brightness"]
+            if (!vCon) document.getElementById("vCon").value = states["settings"]["minimum voltage"]
+
+            main.style.display = "inline"
+        }
+
+        else if (states["active"] == 0) {
+            document.getElementById("status").innerHTML = "Offline"
+            document.getElementById("status").style.color = "tomato"
+            main.style.display = "none"
+        }
+    }
+
+    setInterval(() => {
+        socket.emit("states", "dummy")
+    }, 500);
+
+</script>
+
+</html>
