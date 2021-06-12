@@ -14,8 +14,7 @@ My humble attempt at getting tensorflow and the ESP32-CAM to cooperate (among ot
     * Change the ssid/password
     * Set the correct resistors used for the voltage divider
     * Set server port/local ip
-    * power is supplied through a 4.2 lithium ion battery powered through the appropriate regulator
-    * Change the code to match the cap
+  * Power is supplied through a 4.2 lithium ion battery powered through the appropriate regulator
 
 
 **Web:**
