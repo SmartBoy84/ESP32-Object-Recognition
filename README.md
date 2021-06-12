@@ -3,7 +3,6 @@ My humble attempt at getting tensorflow and the ESP32-CAM to cooperate (among ot
 
 ## Notes:
 * "webcam_detection.py" isn't plug and play. If you plan on running it, you probably know but you're doing but here's a couple of pointers
-  * Get [OpenCV](https://www.lfd.uci.edu/~gohlke/pythonlibs/) & TensorFlow
+  * Get [OpenCV](https://www.lfd.uci.edu/~gohlke/pythonlibs/) & [TensorFlow](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_detection_zoo.md)
+  * My project uses TensorFlow 1.0 which only support Python <= 3.7
   * Get a TensorFlow model [COCO]
-  * Setup a ESP32 web stream [MJPEG] and change the script to match it's local IP
-  * Get a couple of other libraries
