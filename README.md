@@ -1,8 +1,7 @@
 # ESP32-Object-Recognition
-
 My humble attempt at getting tensorflow and the ESP32-CAM to cooperate (among other things)
 
-Notes:
+##Notes:
 * "webcam_detection.py" isn't plug and play. If you plan on running it, you probably know but you're doing but here's a couple of pointers
   * Get [OpenCV](https://www.lfd.uci.edu/~gohlke/pythonlibs/) & TensorFlow
   * Get a TensorFlow model [COCO]
