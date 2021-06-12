@@ -91,6 +91,7 @@ with detection_graph.as_default():
             try:
                 bytes = requests.get('http://192.168.0.110/cam-hi.jpg').content
             except requests.exceptions.ConnectionError:
+                cv2.destroyAllWindows()
                 print("Are the glasses online?")
                 continue
 
