@@ -22,9 +22,7 @@ server.on('listening', function () {
   console.log('UDP Server listening on ' + address.address + ":" + address.port);
 });
 
-http.listen(80, function () {
-  console.log("Webserver has started...")
-})
+http.listen(80, () => console.log("Webserver has started..."))
 
 server.on('message', function (message, remote) {
   k = Buffer.from(message);
@@ -76,8 +74,7 @@ function send(message) {
     io.sockets.emit("changes", glasses)
   }
 
-  if (glasses["active"] == 0) return //would you give cake to a dead man?
-  if (message.length != 3) return
+  if (glasses["active"] == 0 || message.length != 3) return //would you give cake to a dead man?
 
   console.log(message)
 
@@ -102,8 +99,10 @@ app.get('/', function (req, res) {
 
 io.on("connection", socket => {
   socket.on("states", () => {
-    if (Date.now() - glasses["last time"] >= glasses["ping time"]) glasses["active"] = 0
+    if (Date.now() - glasses["last time"] >= glasses["ping time"]) {
+     glasses["active"] = 0
     io.emit("states", glasses)
+    }
   })
 
   socket.on("command", (msg) => send(msg))
