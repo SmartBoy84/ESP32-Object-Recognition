@@ -88,7 +88,11 @@ def load_image_into_numpy_array(image):
 with detection_graph.as_default():
     with tf.Session(graph=detection_graph) as sess:
         while True:
-            bytes = requests.get('http://192.168.0.110/cam-hi.jpg').content
+            try:
+                bytes = requests.get('http://192.168.0.110/cam-hi.jpg').content
+            except requests.exceptions.ConnectionError:
+                print("Are the glasses online?")
+                continue
 
             a = bytes.find(b'\xff\xd8')
             b = bytes.find(b'\xff\xd9')
