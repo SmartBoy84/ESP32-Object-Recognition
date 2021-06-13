@@ -97,9 +97,8 @@ function send(message) {
 
 //****************************************************************************************** */
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, '/index.html'));
-});
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '/index.html')))
+app.get('/states',  (req, res) => res.send(states))
 
 io.on("connection", socket => {
   socket.on("states", () => {
