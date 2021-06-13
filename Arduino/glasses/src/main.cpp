@@ -6,6 +6,9 @@
 #include <esp32cam.h>
 #include <WebServer.h>
 
+#include "soc/soc.h"
+#include "soc/rtc_cntl_reg.h"
+
 #define LED_BUILTIN 4
 #define PACKET_SIZE 4
 
@@ -176,6 +179,7 @@ void mailBoy(void *parameter)
 void setup()
 {
   Serial.begin(115200);
+  WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0);
 
   ledcSetup(ledChannel, 5000, 8); //camera uses channel 1, so use channel 2
   ledcAttachPin(LED_BUILTIN, ledChannel);
