@@ -27,7 +27,7 @@ http.listen(80, () => console.log("Webserver has started..."))
 server.on('message', function (message, remote) {
   k = Buffer.from(message);
   if (k[0] == 255) {
-
+    glasses["ip"] = remote.address
     //IDEK AT THIS POINT, PLEASE AVERT YOUR EYES FROM THIS HIDEOUS CODE
     glasses["active"] = 1;
     glasses["last time"] = Date.now()
@@ -54,6 +54,7 @@ server.bind(port, "192.168.0.98");
 
 var glasses = {
   "active": 1,
+  "ip": null,
   "ping time": 5000, //ms
   "last time": 0,
   "failed attempts": 0,
@@ -88,7 +89,7 @@ function send(message) {
   }), messageHeader).toString(16), 'hex');
 
   //console.log(message)
-  client.send(message, port, ip);
+  client.send(message, port, glasses["ip"]);
 }
 
 //****************************************************************************************** */
