@@ -131,14 +131,14 @@ void mailBoy(void *parameter)
 
     status[0] = ((analogRead(probePin) - voltMin) * 100) / voltRange; //set base on voltmax
 
-    if (status[0] <= settings[1] * 1000)
+    /*if (status[0] <= settings[1] * 1000)
     {
       pinMode(LED_BUILTIN, OUTPUT);
       digitalWrite(LED_BUILTIN, LOW);
       gpio_hold_en(GPIO_NUM_4);
       gpio_deep_sleep_hold_en();
       esp_deep_sleep_start();
-    }
+    }*/
 
     if (server.parsePacket() && server.read(packetBuffer, PACKET_SIZE) > 0)
     {
