@@ -84,13 +84,18 @@ def load_image_into_numpy_array(image):
     return np.array(image.getdata()).reshape(
         (im_height, im_width, 3)).astype(np.uint8)
 
+espStream = requests.Session()
+espStream.mount('http://', requests.adapters.HTTPAdapter(max_retries=1))
+
+ip = espStream.get("http://localhost/states").json()["ip"]
 
 with detection_graph.as_default():
     with tf.Session(graph=detection_graph) as sess:
         while True:
             try:
-                bytes = requests.get('http://192.168.0.110/cam-hi.jpg').content
+                bytes = espStream.get('http://'+ip+'/cam-hi.jpg').content
             except requests.exceptions.ConnectionError:
+                ip = espStream.get("http://localhost/states").json()["ip"]
                 cv2.destroyAllWindows()
                 print("Are the glasses online?")
                 continue
