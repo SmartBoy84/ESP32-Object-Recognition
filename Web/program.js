@@ -27,7 +27,10 @@ http.listen(80, () => console.log("Webserver has started..."))
 server.on('message', function (message, remote) {
   k = Buffer.from(message);
   if (k[0] == 255) {
-    glasses["ip"] = remote.address
+    if (remote.address != glasses["ip"]) {
+      console.log("New identity boss: " + remote.address)
+      glasses["ip"] = remote.address
+    }
     //IDEK AT THIS POINT, PLEASE AVERT YOUR EYES FROM THIS HIDEOUS CODE
     glasses["active"] = 1;
     glasses["last time"] = Date.now()
