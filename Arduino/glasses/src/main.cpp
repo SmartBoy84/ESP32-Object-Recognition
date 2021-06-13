@@ -60,15 +60,13 @@ void handleMjpeg()
 
   Serial.println("STREAM BEGIN");
   WiFiClient webClient = webServer.client();
-  auto startTime = millis();
+
   int res = esp32cam::Camera.streamMjpeg(webClient);
   if (res <= 0)
   {
     Serial.printf("STREAM ERROR %d\n", res);
     return;
   }
-  auto duration = millis() - startTime;
-  Serial.printf("STREAM END %dfrm %0.2ffps\n", res, 1000.0 * res / duration);
 }
 
 //********************************************************************************client initialization****************************************************************************************
