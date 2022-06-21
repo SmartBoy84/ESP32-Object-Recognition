@@ -184,7 +184,7 @@ void setup()
   ledcSetup(ledChannel, 5000, 8); //camera uses channel 1, so use channel 2
   ledcAttachPin(LED_BUILTIN, ledChannel);
 
-  WiFi.begin("[SSID]", [password]");
+  WiFi.begin("[SSID]", "[password]");
 
   while (WiFi.status() != WL_CONNECTED)
     delay(100);
